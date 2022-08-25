@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PersonInfo from "./components/PersonInfo";
 
+// importing images
 import noLogo from "./assets/images/number-logo.png";
 import emailLogo from "./assets/images/email-logo.png";
 import fbLogo from "./assets/images/fb-logo.png";
@@ -12,6 +13,7 @@ import crossIcon from "./assets/images/cross-icon.png";
 import SocialInfo from "./components/SocialInfo";
 import ModalContent from "./components/ModalContent";
 
+// Passing Dynamic Data
 const data = [
   { mobile: [3128017920, 5123527877] },
   {
@@ -35,7 +37,9 @@ const data = [
   },
 ];
 function App() {
+  // Setting state to control modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // Function to update modal status
   function modalStatus() {
     setIsModalOpen(true);
   }
@@ -43,6 +47,7 @@ function App() {
     <>
       <div className="container">
         <div className="left-content">
+          {/* Rendering Personal Info Component and Passing Props */}
           <PersonInfo logo={noLogo} data={data[0].mobile[0]} />
           <PersonInfo
             logo={emailLogo}
@@ -51,6 +56,7 @@ function App() {
           />
         </div>
         <div className="right-content">
+          {/* Rendering Social Info Component and Passing Props */}
           <SocialInfo logo={fbLogo} username={data[3].usernames[0].fb} />
           <SocialInfo
             logo={twitterLogo}
@@ -59,6 +65,7 @@ function App() {
           <SocialInfo logo={gitLogo} username={data[3].usernames[0].git} />
         </div>
       </div>
+      {/* Conditional Renderring according to modal status */}
       {isModalOpen && (
         <div className="modal">
           <div className="main-logo">
@@ -89,6 +96,7 @@ function App() {
           </div>
         </div>
       )}
+      {/* Conditional Rendering for Overlay according to modal status*/}
       {isModalOpen && (
         <div className="overlay" onClick={() => setIsModalOpen(false)}></div>
       )}
