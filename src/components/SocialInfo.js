@@ -12,7 +12,7 @@ const SocialInfo = ({ logo, username }) => {
     const copyTime = setTimeout(() => {
       setIsCopied(false);
       setShowCopyIcon(true);
-    }, 500);
+    }, 2000);
     return () => clearTimeout(copyTime);
   }, [isCopied]);
   return (
