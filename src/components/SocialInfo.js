@@ -7,9 +7,11 @@ import copyIcon from "../assets/images/copy-icon.png";
 
 const SocialInfo = ({ logo, username }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [showCopyIcon, setShowCopyIcon] = useState(true);
   useEffect(() => {
     const copyTime = setTimeout(() => {
       setIsCopied(false);
+      setShowCopyIcon(true);
     }, 500);
     return () => clearTimeout(copyTime);
   }, [isCopied]);
@@ -19,18 +21,17 @@ const SocialInfo = ({ logo, username }) => {
       <p
         onClick={() => {
           setIsCopied(true);
+          setShowCopyIcon(false);
           navigator.clipboard.writeText(username);
         }}
       >
         {username}
       </p>
-      <img src={copyIcon} alt="" id="copy-icon" />
-      {isCopied && (
-        <span className="copy-status">
-          <MdVerified />
-          <span>Copied</span>
-        </span>
-      )}
+      {showCopyIcon && <img src={copyIcon} alt="" id="copy-icon" />}
+      <span className={`copy-status ${isCopied ? "show" : ""}`}>
+        <MdVerified />
+        <span>Copied</span>
+      </span>
     </div>
   );
 };

@@ -7,10 +7,12 @@ import copyIcon from "../assets/images/copy-icon.png";
 
 const PersonInfo = ({ logo, data, modal }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [showCopyIcon, setShowCopyIcon] = useState(true);
   useEffect(() => {
     const copyTime = setTimeout(() => {
       setIsCopied(false);
-    }, 500);
+      setShowCopyIcon(true);
+    }, 2000);
     return () => clearTimeout(copyTime);
   }, [isCopied]);
   return (
@@ -19,18 +21,18 @@ const PersonInfo = ({ logo, data, modal }) => {
       <p
         onClick={() => {
           setIsCopied(true);
+          setShowCopyIcon(false);
           navigator.clipboard.writeText(data);
         }}
       >
+        {/* next line is add a + sign before numbers and not before emails */}
         {typeof data === "number" ? "+" + data : data}
       </p>
-      <img src={copyIcon} alt="" id="copy-icon" />
-      {isCopied && (
-        <span className="copy-status">
-          <MdVerified />
-          <span>Copied</span>
-        </span>
-      )}
+      {showCopyIcon && <img src={copyIcon} alt="" id="copy-icon" />}
+      <span className={`copy-status ${isCopied ? "show" : ""}`}>
+        <MdVerified />
+        <span>Copied</span>
+      </span>
       <span className="see-all-link" onClick={modal}>
         {typeof data !== "number" ? "See all" : ""}
       </span>

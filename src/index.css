@@ -40,15 +40,26 @@ body {
   display: flex;
   align-items: center;
   color: #4ca64c;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+  position: absolute;
+  transition: opacity 0.7s ease;
+}
+.copy-status.show {
+  opacity: 1;
+  transform: scale(1);
+  position: static;
+  pointer-events: all;
 }
 .copy-status span {
   margin-bottom: 1px;
+  font-size: 12px;
 }
 .see-all-link {
   color: #3b5aff;
 }
 .see-all-link:hover {
-  /* text-decoration: underline; */
   color: rgba(59, 90, 255, 0.7);
 }
 
